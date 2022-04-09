@@ -4,8 +4,9 @@
 // Then, a function to truncate the list based on the value for "Cuisines" being selected first
 "use strict";
 
+
 // import and assign the whole dataset
-const restaurants_json = "https://raw.githubusercontent.com/rebecca-kwon/project3_groupb/main/Michelin_Source/Michelin_Data_Final.json";
+const restaurants_json = "/data";
 var data;
 // create variables to target dropdowns
 const dropdownCuisine = d3.select("#selCuisine");
@@ -212,5 +213,7 @@ function re_init() {
         dropdownCuisine.append("option").text(x).property("value")
     });           
 }
+
+console.log(data)
 
 init();
