@@ -64,18 +64,11 @@
                                     <!-- Code pulled from W3 schools - https://www.w3schools.com/howto/howto_js_filter_dropdown.asp -->
                                     <li>
                                         <div class="dropdown">
-                                            <a class="nav-link dropdwon-toggle dropbtn" button onclick="myFunction()">
+                                            <a class="nav-link dropdown-toggle dropbtn" button onclick="cityFunction()">
                                                 Choose City
                                             </a>
-                                            <div id="myDropdown" class="dropdown-content">
+                                            <div id="selCity" onchange="cityChanged(this.value)" class="dropdown-content">
                                               <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                                              <a href="#about">About</a>
-                                              <a href="#base">Base</a>
-                                              <a href="#blog">Blog</a>
-                                              <a href="#contact">Contact</a>
-                                              <a href="#custom">Custom</a>
-                                              <a href="#support">Support</a>
-                                              <a href="#tools">Tools</a>
                                             </div>
                                         </div>
                                     </li>
@@ -91,45 +84,11 @@
                                     <!-- Code pulled from W3 schools - https://www.w3schools.com/howto/howto_js_filter_dropdown.asp -->
                                     <li>
                                         <div class="dropdown">
-                                            <a class="nav-link dropdwon-toggle dropbtn" button onclick="myFunction()">
+                                            <a class="nav-link dropdown-toggle dropbtn" button onclick="cuisineFunction()">
                                                 Choose Cuisine
                                             </a>
-                                            <div id="myDropdown" class="dropdown-content">
-                                              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                                              <a href="#about">About</a>
-                                              <a href="#base">Base</a>
-                                              <a href="#blog">Blog</a>
-                                              <a href="#contact">Contact</a>
-                                              <a href="#custom">Custom</a>
-                                              <a href="#support">Support</a>
-                                              <a href="#tools">Tools</a>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <!-- filler item -->
-                                    <li class="nav-item">
-                                        <a class="nav-link">
-                                            -
-                                        </a>
-                                    </li>
-
-                                    <!-- dropdown searchable menu -- CUISINE -->
-                                    <!-- Code pulled from W3 schools - https://www.w3schools.com/howto/howto_js_filter_dropdown.asp -->
-                                    <li>
-                                        <div class="dropdown">
-                                            <a class="nav-link dropdwon-toggle dropbtn" button onclick="myFunction()">
-                                                Choose City
-                                            </a>
-                                            <div id="myDropdown" class="dropdown-content">
-                                              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                                              <a href="#about">About</a>
-                                              <a href="#base">Base</a>
-                                              <a href="#blog">Blog</a>
-                                              <a href="#contact">Contact</a>
-                                              <a href="#custom">Custom</a>
-                                              <a href="#support">Support</a>
-                                              <a href="#tools">Tools</a>
+                                            <div id="selCuisine" onchange="cuisineChanged(this.value)" class="dropdown-content">
+                                                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
                                             </div>
                                         </div>
                                     </li>
