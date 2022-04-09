@@ -13,6 +13,7 @@ data = pd.read_csv('Michelin_Source/Michelin_Data_Final.csv')
 
 jsoned=pd.DataFrame(data).dropna().to_dict('records')
 
+db["collection"].drop()
 db.collection.insert_many(jsoned)
 
 

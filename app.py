@@ -1,7 +1,5 @@
-from flask import Flask, render_template, redirect, jsonify, Response
+from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
-import pandas as pd
-import json
 import json_data
 
 
@@ -13,7 +11,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
 
-    # Return template and data
+    # Return template 
     return render_template("index.html")
 
 
@@ -22,7 +20,7 @@ def data():
 
     data2=json_data.jsondata()
 
-    return jsonify(results=data2[0:len(data2)])
+    return jsonify(results=data2)
 
 
 
