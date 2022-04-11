@@ -4,9 +4,8 @@
 // Then, a function to truncate the list based on the value for "Cuisines" being selected first
 "use strict";
 
-
 // import and assign the whole dataset
-const restaurants_json = "/data";
+const restaurants_json = "https://raw.githubusercontent.com/rebecca-kwon/project3_groupb/main/Michelin_Source/Michelin_Data_Final.json";
 var data;
 // create variables to target dropdowns
 const dropdownCuisine = d3.select("#selCuisine");
@@ -15,9 +14,10 @@ var middleData = {};
 var finalData = {};
 
 // Josh's functions to autofill the dropdowns
+// Code pulled from W3 schools - https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function myFunction() {
+function cuisineFunction() {
     document.getElementById("selCuisine").classList.toggle("show");
   }  
 function filterFunction() {
@@ -34,8 +34,9 @@ for (i = 0; i < a.length; i++) {
     a[i].style.display = "none";
     }
 }
+
 }
-function myFunction() {
+function cityFunction() {
     document.getElementById("selCity").classList.toggle("show");
   }  
 function filterFunction() {
@@ -54,6 +55,72 @@ for (i = 0; i < a.length; i++) {
 }
 }
 
+// create a sorting function that can be called to remove duplicate values from a list
+// by create, I mean steal from stackoverflow question 9229645
+function uniq(a) {
+    return a.sort().filter(function(item, pos, ary) {
+        return !pos || item != ary[pos - 1];
+    });
+}
+// makea function to count occurrences in a list and pair them into lists
+function countOccurrences (array) {
+    let a = [],
+      b = [],
+      arr = [...array], // clone array so we don't change the original when using .sort()
+      prev;
+  
+    arr.sort();
+    for (let element of arr) {
+      if (element !== prev) {
+        a.push(element);
+        b.push(1);
+      }
+      else ++b[b.length - 1];
+      prev = element;
+    }
+    let occurness = []
+
+    for (let i = 0; i < a.length; i++) {
+        occurness.push([a[i],parseInt(b[i])])
+      }
+    return occurness;
+}  
+function makeBarChart() {
+    // Define the chart to be drawn. List of lists. sublists are rows
+    // if cuisine is selected, show top 10 cities with that cuisine
+    // out of cuisine,
+    let citiesholding = [] 
+    Object.values(middleData).forEach(value => {
+        citiesholding.push(middleData[value.ind].city);
+    });
+    var info = new google.visualization.DataTable();
+    info.addColumn('string','City');
+    info.addColumn('number','Restaurants');
+    info.addRows(countOccurrences(citiesholding))
+     let options = {title: `Top ${countOccurrences(citiesholding).length} Cities For ${dropdownCuisine.node().value} Food`};
+     // Instantiate and draw the chart.
+     let chart = new google.visualization.BarChart(document.getElementById('container'));
+     chart.draw(info, options);
+}
+
+// make a pie chart to show the number of stars in the restaurants in the city
+function makePieChart() {
+    // Define the chart to be drawn. List of lists. sublists are rows
+    // if cuisine is selected, show top 10 cities with that cuisine
+    // out of cuisine,
+    let cuisineholding = [] 
+    Object.values(middleData).forEach(value => {
+        cuisineholding.push(middleData[value.ind].cuisine1);
+    });
+    var info = new google.visualization.DataTable();
+    info.addColumn('string','Cuisine');
+    info.addColumn('number','Restaurants');
+    info.addRows(countOccurrences(cuisineholding))
+     let options = {title: `Top ${countOccurrences(cuisineholding).length} Cuisine For ${dropdownCity.node().value}`};
+     // Instantiate and draw the chart.
+     let chart = new google.visualization.PieChart(document.getElementById('container'));
+     chart.draw(info, options);
+}
 // establish the function to create the dataset when both dropdowns have options selected 
 function bothSelected() {
     Object.values(middleData).forEach(value => {
@@ -90,8 +157,8 @@ function bothSelected() {
         mf = 1
     }
     //logging for data tracking
-    console.log(item+" ( " +mf +" times ) ") ;
-    console.log(hotelArray)
+    // console.log(item+" ( " +mf +" times ) ") ;
+    // console.log(hotelArray)
 
     //establish the best_hotel variable for referencing
     var best_hotel = {"Hotel_Name":"","h_lat":"","h_lon":""};
@@ -102,14 +169,8 @@ function bothSelected() {
             best_hotel.h_lon = finalData[value.ind].h_lon;
         }    
     });
-    console.log(best_hotel);
-}
-// create a sorting function that can be called to remove duplicate values from a list
-// by create, I mean steal from stackoverflow question 9229645
-function uniq(a) {
-    return a.sort().filter(function(item, pos, ary) {
-        return !pos || item != ary[pos - 1];
-    });
+    // console.log(best_hotel);
+    // console.log(JSON.stringify(finalData))
 }   
 // create the function that will parse the dataset to only contain the the restaurants
 // with the cuisine that is selected  
@@ -121,8 +182,8 @@ function cuisineChanged(food) {
                 if (data[value.ind].cuisine1 === food) {
                     middleData[value.ind] = value;           
                 }
-            }
-        )
+            });
+            makeBarChart()
     }
     else {
         bothSelected()
@@ -131,6 +192,8 @@ function cuisineChanged(food) {
     Object.keys(middleData).forEach(key => {
         cities.push(middleData[key].city);
     });
+
+    
 
     Object.values(uniq(cities)).forEach(x => {
         dropdownCity.append("option").text(x).property("value")
@@ -149,8 +212,8 @@ function cityChanged(city) {
                 if (data[value.ind].city === city) {
                     middleData[value.ind] = value;           
                 }
-            }
-        )
+            });
+            makePieChart()
     }
     else {
         bothSelected()
@@ -159,7 +222,7 @@ function cityChanged(city) {
     Object.keys(middleData).forEach(key => {
         cuisines.push(middleData[key].cuisine1);
     });
-
+    
     Object.values(uniq(cuisines)).forEach(x => {
         dropdownCuisine.append("option").text(x).property("value")
     });
@@ -213,7 +276,5 @@ function re_init() {
         dropdownCuisine.append("option").text(x).property("value")
     });           
 }
-
-console.log(data)
 
 init();

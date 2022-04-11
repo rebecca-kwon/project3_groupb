@@ -1,7 +1,7 @@
 // Creating the map object
-var myMap = L.map("map", {
+var myMap = L.map("map2", {
     center: [38, -8.545892],
-    zoom: 2
+    zoom: 2.5
 });
   
 // Adding the tile layer
@@ -10,7 +10,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap);
   
 // Get the data with d3.
-d3.json('Michelin_Data_Final.json').then(function(response) {
+d3.json('../json/Michelin_Data_Final.json').then(function(response) {
   
     console.log(response);
 

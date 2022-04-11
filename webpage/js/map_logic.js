@@ -1,7 +1,7 @@
 // Add custom marker for map
 var redIcon = new L.Icon({
-	iconUrl: 'img/marker-icon-red.png',
-	shadowUrl: 'img/marker-shadow.png',
+	iconUrl: '../images/marker-icon-red.png',
+	shadowUrl: '../images/marker-shadow.png',
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
 	popupAnchor: [1, -34],
@@ -9,17 +9,13 @@ var redIcon = new L.Icon({
 });
 
 var restIcon = new L.Icon({
-	iconUrl: 'img/restaurant-icon.png',
-	shadowUrl: 'img/marker-shadow.png',
+	iconUrl: '../images/restaurant-icon.png',
+	shadowUrl: '../images/marker-shadow.png',
 	iconSize: [35, 41],
 	iconAnchor: [12, 41],
 	popupAnchor: [1, -34],
 	shadowSize: [41, 41]
 });
-
-// add hotel
-var best_hotel = {"Hotel_Name":"Four Seasons Hotel New York Downtown","h_lat":"40.7126317","h_lon":"-74.0091904"}
-;
 
 function createMap(Restaurants) {
 
@@ -85,4 +81,4 @@ function createMarkers(response) {
 }
 
 // load in JSON data
-d3.json('finaldata.json').then(createMarkers);
+d3.json('../json/finaldata.json').then(createMarkers);
