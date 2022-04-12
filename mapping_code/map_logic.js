@@ -85,4 +85,4 @@ function createMarkers(response) {
 }
 
 // load in JSON data
-d3.json('finaldata.json').then(createMarkers);
+d3.json(finalData).then(createMarkers);
