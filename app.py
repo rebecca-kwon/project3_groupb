@@ -14,7 +14,7 @@ app = Flask(__name__)
 def home():
 
     # Return template and data
-    return render_template("index.html")
+    return render_template("webpage/index.html")
 
 
 @app.route("/data")

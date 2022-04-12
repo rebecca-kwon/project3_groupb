@@ -142,7 +142,7 @@ function createMap() {
     // Add tile layer to map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(myMap);
+    }).addTo(myMap);
     // Add hotel to map
     L.marker([best_hotel.h_lat, best_hotel.h_lon], {icon: redIcon})
     .bindPopup(`<h1>${best_hotel.Hotel_Name}</h1>`)
