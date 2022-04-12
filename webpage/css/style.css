@@ -46,6 +46,6 @@ div {
 
 img {
   max-width: 100%;
-  height: auto;
-  padding: 10px 5px;
+  max-height: auto;
+  padding: 5px 5px
 }

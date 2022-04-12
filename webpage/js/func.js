@@ -12,6 +12,7 @@ const dropdownCuisine = d3.select("#selCuisine");
 const dropdownCity = d3.select("#selCity");
 var middleData = {};
 var finalData = {};
+var best_hotel = {};
 
 // Josh's functions to autofill the dropdowns
 // Code pulled from W3 schools - https://www.w3schools.com/howto/howto_js_filter_dropdown.asp

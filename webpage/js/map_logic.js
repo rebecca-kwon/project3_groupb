@@ -17,6 +17,10 @@ var restIcon = new L.Icon({
 	shadowSize: [41, 41]
 });
 
+// add hotel
+var best_hotel = {"Hotel_Name":"Four Seasons Hotel New York Downtown","h_lat":"40.7126317","h_lon":"-74.0091904"}
+;
+
 function createMap(Restaurants) {
 
 // Add tile layer to map
