@@ -53,7 +53,47 @@ for (i = 0; i < a.length; i++) {
     }
 }
 }
+// create a sorting function that can be called to remove duplicate values from a list
+// by create, I mean steal from stackoverflow question 9229645
+function uniq(a) {
+    return a.sort().filter(function(item, pos, ary) {
+        return !pos || item != ary[pos - 1];
+    });
+}
+// makea function to count occurrences in a list
+function countOccurrences(arr,val) {
+    arr.reduce((a,v) => (v === val ? a + 1 : a), 0)
+    console.log([val,a])
+    return [val,a];
+}
+function makeBarChart() {
+    // Define the chart to be drawn. List of lists. sublists are rows
+    // if cuisine is selected, show top 10 cities with that cuisine
+    // out of cuisine,
+    let citys = []
+    let occurrences = []
+    let citiesholding = [] 
+    Object.values(middleData).forEach(value => {
+        citiesholding.push(middleData[value.ind].city);
+        citys = citiesholding;
+        uniq(citiesholding);
+        Object.entries(citiesholding).forEach(city => {
 
+        })
+    })
+
+    var info = google.visualization.arrayToDataTable([["Top 10 Cities For",dropdownCuisine.node().value],
+    [ , ] 
+     ]);
+     var options = {title: 'Top 5 Country with Specific Cuisine'};
+     // Instantiate and draw the chart.
+     var chart = new google.visualization.BarChart(document.getElementById('container'));
+     chart.draw(info, options);
+}
+// make a pie chart to show the number of stars in the restaurants in the city
+function makePieChart(data) {
+
+}
 // establish the function to create the dataset when both dropdowns have options selected 
 function bothSelected() {
     Object.values(middleData).forEach(value => {
@@ -104,13 +144,7 @@ function bothSelected() {
     });
     console.log(best_hotel);
 }
-// create a sorting function that can be called to remove duplicate values from a list
-// by create, I mean steal from stackoverflow question 9229645
-function uniq(a) {
-    return a.sort().filter(function(item, pos, ary) {
-        return !pos || item != ary[pos - 1];
-    });
-}   
+   
 // create the function that will parse the dataset to only contain the the restaurants
 // with the cuisine that is selected  
 function cuisineChanged(food) {
